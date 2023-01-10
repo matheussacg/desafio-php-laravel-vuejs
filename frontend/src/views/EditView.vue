@@ -145,7 +145,6 @@ export default {
                     if(response.data == 'success'){
                         this.excluido = true
                         this.getEnderecos()
-                        this.$router.push('/editar')
                     }  
 
                 });
