@@ -45,12 +45,6 @@ class enderecoController extends Controller
         return response()->json('success');
     }
 
-    public function detalhar($id)
-    {
-        $endereco = Endereco::find($id);
-        return response()->json($endereco);
-    }
-
     public function usuarioEndereco($usuario, $endereco){
         $user = Usuario::with('enderecos')->find($usuario);
         $endereco = Endereco::find($endereco);
