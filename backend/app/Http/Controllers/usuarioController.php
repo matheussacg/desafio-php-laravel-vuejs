@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Usuario;
+use App\Models\Endereco;
 use Illuminate\Http\Request;
 
 class usuarioController extends Controller
@@ -15,7 +16,7 @@ class usuarioController extends Controller
     }
 
     public function adicionar(Request $request)
-    {
+    {   
         $novoUsuario = new Usuario();
         $novoUsuario->nome = $request->nome;
         $novoUsuario->cpf = $request->cpf;

@@ -122,8 +122,16 @@ export default {
         },
 
         update(){
-            var data = {nome:this.nome,cpf:this.cpf,email:this.email,perfil_id:this.perfil_id}
-            axios.put(`http://127.0.0.1:8000/api/update/${this.$route.params.id}`, data).then((response) => {
+
+            var dataUsuario = {nome:this.nome,cpf:this.cpf,email:this.email,perfil_id:this.perfil_id}
+
+            axios.put(`http://127.0.0.1:8000/api/update/${this.$route.params.id}`, dataUsuario).then((response) => {
+                console.log(response)
+            }); 
+
+            var dataEndereco = {logradouro:this.logradouro,cep:this.cep,id_usuario:this.$route.params.id}
+
+            axios.post('http://127.0.0.1:8000/api/adicionarendereco/', dataEndereco).then((response) => {
                 console.log(response)
             }); 
 

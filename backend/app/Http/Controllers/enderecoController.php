@@ -22,7 +22,9 @@ class enderecoController extends Controller
         $novoEndereco->cep = $request->cep;
         $novoEndereco->save();
 
-        return response()->json($novoEndereco);
+        $novoEndereco->usuarios()->attach($request->id_usuario);
+
+        return response()->json('success');
     }
 
     public function editar(Endereco $endereco, Request $request)

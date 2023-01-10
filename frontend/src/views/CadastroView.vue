@@ -60,8 +60,6 @@ export default {
     data(){
         return {
             listagemPerfils: [],
-            novoUsuario: "",
-            novoEndereco: ""
         }
         
     },
@@ -70,17 +68,15 @@ export default {
         addUsuario(){
 
             var dataUsuario = {nome:this.nome,cpf:this.cpf,email:this.email,perfil_id:this.perfil_id}
-            var dataEndereco = {logradouro:this.logradouro,cep:this.cep}
 
             axios.post("http://127.0.0.1:8000/api/adicionar", dataUsuario).then((response) => {
                 console.log(response);
+                this.id_usuario = response.data.id
             });
+
+            var dataEndereco = {logradouro:this.logradouro,cep:this.cep,id_usuario:1}
 
             axios.post("http://127.0.0.1:8000/api/adicionarendereco", dataEndereco).then((response) => {
-                console.log(response);
-            });
-
-            axios.get(`http://127.0.0.1:8000/api/usuario-endereco/${1}/${3}`).then((response) => {
                 console.log(response);
             });
 
