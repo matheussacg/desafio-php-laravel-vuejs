@@ -62,7 +62,7 @@
                 <td>{{item.nome}}</td>
                 <td>{{item.cpf}}</td>
                 <td>{{item.email }}</td>
-                <td>{{item.perfil_id}}</td>
+                <td>{{item.perfil.tipo}}</td>
                 <td>
                     <button @click="getDetalhes(item.id)" type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#JanelaModal">Detalhar</button>
 

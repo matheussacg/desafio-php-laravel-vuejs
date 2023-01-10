@@ -29,7 +29,7 @@ Route::post('/adicionarendereco', [enderecoController::class, 'adicionar']);
 Route::get('/editarendereco/{endereco}', [enderecoController::class, 'editar']);
 Route::put('/updateendereco/{endereco}', [enderecoController::class, 'update']);
 Route::delete('/deletarendereco/{endereco}', [enderecoController::class, 'delete']);
-Route::get('/usuario-endereco/{usuario}/{endereco}', [enderecoController::class, 'usuarioEndereco']);
+Route::post('/usuario-endereco/{usuario}/{endereco}', [enderecoController::class, 'usuarioEndereco']);
 
 
 Route::get('/listarperfils', [perfilController::class, 'listarperfils']);

@@ -9,7 +9,7 @@ class usuarioController extends Controller
 {
     public function listagem(Request $request)
     {
-        $Usuario = Usuario::all();
+        $Usuario = Usuario::with('enderecos','perfil')->get();
 
         return response()->json($Usuario);
     }
@@ -50,7 +50,7 @@ class usuarioController extends Controller
 
     public function detalhar($id)
     {
-        $user = Usuario::with('enderecos')->find($id);
+        $user = Usuario::with('enderecos', 'perfil')->find($id);
         return response()->json($user);
     }
 

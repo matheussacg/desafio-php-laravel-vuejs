@@ -60,6 +60,8 @@ export default {
     data(){
         return {
             listagemPerfils: [],
+            novoUsuario: "",
+            novoEndereco: ""
         }
         
     },
@@ -78,7 +80,7 @@ export default {
                 console.log(response);
             });
 
-            axios.get(`http://127.0.0.1:8000/api/usuario-endereco/${1}/${1}`).then((response) => {
+            axios.get(`http://127.0.0.1:8000/api/usuario-endereco/${2}/${2}`).then((response) => {
                 console.log(response);
             });
 

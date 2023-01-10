@@ -47,6 +47,10 @@
             
         </div>
 
+        <div v-if="excluido" class="alert alert-success mt-4">
+            Excluido com sucesso!
+        </div>
+
         <div class="container">
             <div class="row">
                 <div class="col-3"></div>
@@ -64,7 +68,7 @@
                         <td>{{endereco.logradouro}}</td>
                         <td>{{endereco.cep}}</td>
                         <td>
-                            <button type="button" class="btn btn-danger">Excluir</button>
+                            <button @click="excluirEndereco(endereco.id)" type="button" class="btn btn-danger">Excluir</button>
                         </td>
                         </tr>
                     </tbody>
@@ -95,7 +99,8 @@ export default {
             email: "",
             perfil_id: "",
 
-            listagemPerfils: []
+            listagemPerfils: [],
+            excluido: "",
 
         }
     },
@@ -126,13 +131,33 @@ export default {
                         this.$router.push('/listar')
                 }, 500);
 
-        }
+        },
+
+        getEnderecos(){
+            axios.get(`http://127.0.0.1:8000/api/detalhar/${this.$route.params.id}`).then((response) => {
+                    this.enderecos = response.data.enderecos
+            });
+        },
+
+        excluirEndereco($id){
+            if(confirm("Deseja realmente excluir esse registro?")){
+                axios.delete(`http://127.0.0.1:8000/api/deletarendereco/${$id}`).then((response) => {
+                    if(response.data == 'success'){
+                        this.excluido = true
+                        this.getEnderecos()
+                        this.$router.push('/editar')
+                    }  
+
+                });
+            }
+        },
 
     },
 
     created(){
         this.getListagemPerfils()
         this.getUsuario()
+        this.getEnderecos()
     }
     
 };
