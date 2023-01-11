@@ -60,7 +60,6 @@ export default {
     data(){
         return {
             listagemPerfils: [],
-            id_user: "",
         }
         
     },
@@ -72,13 +71,11 @@ export default {
 
             axios.post("http://127.0.0.1:8000/api/adicionar", dataUsuario).then((response) => {
                 console.log(response)
-                this.$id_user = response.data.id
             });
             
-            var dataEndereco = {logradouro:this.logradouro,cep:this.cep,id_usuario:this.$id_user}
+            var dataEndereco = {logradouro:this.logradouro,cep:this.cep}
 
             axios.post("http://127.0.0.1:8000/api/adicionarendereco", dataEndereco).then((response) => {
-                console.log(dataEndereco)
                 console.log(response)
             });
 

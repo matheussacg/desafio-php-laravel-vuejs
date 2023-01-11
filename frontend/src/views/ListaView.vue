@@ -100,7 +100,7 @@
                                                     <td>{{detalhesUsuario.nome}}</td>
                                                     <td>{{detalhesUsuario.cpf}}</td>
                                                     <td>{{detalhesUsuario.email }}</td>
-                                                    <td>{{detalhesUsuario.perfil_id}}</td>
+                                                    <td>{{detalhesUsuario.perfil}}</td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -160,7 +160,6 @@ export default {
             moment: moment,
             listagem: [],
             detalhesUsuario: [],
-            perfil: "",
             excluido: false,
 
             nome: "",
