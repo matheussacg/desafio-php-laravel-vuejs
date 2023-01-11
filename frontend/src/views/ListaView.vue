@@ -100,7 +100,7 @@
                                                     <td>{{detalhesUsuario.nome}}</td>
                                                     <td>{{detalhesUsuario.cpf}}</td>
                                                     <td>{{detalhesUsuario.email }}</td>
-                                                    <td>{{detalhesUsuario.perfil}}</td>
+                                                    <td>{{this.perfilTipo}}</td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -160,6 +160,7 @@ export default {
             moment: moment,
             listagem: [],
             detalhesUsuario: [],
+            perfilTipo: "",
             excluido: false,
 
             nome: "",
@@ -172,10 +173,11 @@ export default {
     methods:{
 
         limparFiltro(){
-            this.nome = "";
-            this.cpf = "";
-            this.datai = "";
-            this.dataf = "";
+            this.nome = ""
+            this.cpf = ""
+            this.datai = ""
+            this.dataf = ""
+            this.getListagem()
         },
 
         getListagem(){
@@ -201,6 +203,7 @@ export default {
         getDetalhes($id){
             axios.get(`http://127.0.0.1:8000/api/detalhar/${$id}`).then((response) => {
                 this.detalhesUsuario = response.data
+                this.perfilTipo = response.data.perfil.tipo
             });
         },
 

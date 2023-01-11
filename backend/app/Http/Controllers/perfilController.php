@@ -9,15 +9,15 @@ class perfilController extends Controller
 {
     public function listarperfils(Request $request)
     {
-        $Perfil = Perfil::all();
+        $perfil = Perfil::all();
 
-        return response()->json($Perfil);
+        return response()->json($perfil);
     }
 
     public function buscarPerfil($id)
     {
-        $Perfil = Perfil::find($id);
-        return response()->json($Perfil);
+        $perfil = Perfil::find($id);
+        return response()->json($perfil);
     }
 
 }
