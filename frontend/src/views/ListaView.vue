@@ -36,7 +36,7 @@
 
                     <div>
                         <button class="btn btn-secondary btn-sm" @click="getListagem()">Pesquisar</button>
-                        <button class="btn btn-warning btn-sm" @click="limparFiltro">Limpar Filtro</button>
+                        <button class="btn btn-secondary btn-sm" @click="limparFiltro">Limpar Filtro</button>
                     </div>
 
                 </div>
@@ -63,7 +63,7 @@
             <tbody>
                 <tr v-for="item in listagem" :key="item.id">
                 <th>{{item.id}}</th>
-                <td>{{item.created_at}}</td>
+                <td>{{ moment(item.created_at).format("YYYY-MM-DD") }}</td>
                 <td>{{item.nome}}</td>
                 <td>{{item.cpf}}</td>
                 <td>{{item.email }}</td>
@@ -96,7 +96,7 @@
                                             <tbody>
                                                 <tr>
                                                     <th>{{detalhesUsuario.id}}</th>
-                                                    <td>{{detalhesUsuario.created_at}}</td>
+                                                    <td>{{moment(detalhesUsuario.created_at).format("YYYY-MM-DD")}}</td>
                                                     <td>{{detalhesUsuario.nome}}</td>
                                                     <td>{{detalhesUsuario.cpf}}</td>
                                                     <td>{{detalhesUsuario.email }}</td>
@@ -151,11 +151,13 @@
 <script>
 
 import axios from 'axios'
+import moment from "moment"
 
 export default {
 
     data(){
         return {
+            moment: moment,
             listagem: [],
             detalhesUsuario: [],
             perfil: "",
