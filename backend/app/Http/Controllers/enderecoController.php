@@ -10,22 +10,22 @@ class enderecoController extends Controller
 {
     public function listagem(Request $request)
     {
-        $Endereco = Endereco::all();
+        $endereco = Endereco::all();
 
-        return response()->json($Endereco);
+        return response()->json($endereco);
     }
 
     public function adicionar(Request $request)
     {
         if($request->logradouro != "" && $request->cep != "") {
-        $novoEndereco = new Endereco();
-        $novoEndereco->logradouro = $request->logradouro;
-        $novoEndereco->cep = $request->cep;
-        $novoEndereco->save();
+        $endereco = new Endereco();
+        $endereco->logradouro = $request->logradouro;
+        $endereco->cep = $request->cep;
+        $endereco->save();
 
-        $novoEndereco->usuarios()->attach($request->id_usuario);
+        $endereco->usuarios()->attach($request->id_usuario);
     
-        return response()->json($novoEndereco);
+        return response()->json($endereco);
     }
 
     }

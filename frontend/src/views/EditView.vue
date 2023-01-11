@@ -135,7 +135,7 @@ export default {
 
             setTimeout(() => {
                         this.$router.push('/listar')
-                }, 500);
+                }, 1000);
 
         },
 

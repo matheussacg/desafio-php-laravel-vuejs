@@ -10,34 +10,34 @@ class usuarioController extends Controller
 {
     public function listagem(Request $request)
     {
-        $Usuario = Usuario::with('enderecos','perfil');
+        $user = Usuario::with('enderecos','perfil');
 
         if ($request->nome != "") {
-            $Usuario->where('nome', 'LIKE', '%' . $request->nome . '%');
+            $user->where('nome', 'LIKE', '%' . $request->nome . '%');
         }
     
         if ($request->cpf != "") {
-            $Usuario->where('cpf', 'LIKE', '%' . $request->cpf . '%');
+            $user->where('cpf', 'LIKE', '%' . $request->cpf . '%');
         }
     
         if ($request->datai != "" && $request->dataf != "") {
-            $Usuario->whereDate('created_at', '>=', $request->datai);
-            $Usuario->whereDate('created_at', '<=', $request->dataf);
+            $user->whereDate('created_at', '>=', $request->datai);
+            $user->whereDate('created_at', '<=', $request->dataf);
         }
 
-        return response()->json($Usuario->get());
+        return response()->json($user->get());
     }
 
     public function adicionar(Request $request)
     {   
-        $novoUsuario = new Usuario();
-        $novoUsuario->nome = $request->nome;
-        $novoUsuario->cpf = $request->cpf;
-        $novoUsuario->email = $request->email;
-        $novoUsuario->perfil_id = $request->perfil_id;
-        $novoUsuario->save();
+        $user = new Usuario();
+        $user->nome = $request->nome;
+        $user->cpf = $request->cpf;
+        $user->email = $request->email;
+        $user->perfil_id = $request->perfil_id;
+        $user->save();
 
-        return response()->json($novoUsuario);
+        return response()->json($user);
     }
 
     public function editar(Usuario $user, Request $request)
