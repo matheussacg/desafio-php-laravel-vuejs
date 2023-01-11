@@ -1,7 +1,7 @@
 <template>
 
     <div>
-        <h1>Listagem e Filtro</h1>
+        <h1>Listagem e Pesquisa</h1>
         <router-link to="/adicionar">
             <button type="button" class="btn btn-success mt-3">Novo Registro</button>
         </router-link>
@@ -35,7 +35,7 @@
                     </div>
 
                     <div>
-                        <button class="btn btn-primary btn-sm" @click="getListagem()">Pesquisar</button>
+                        <button class="btn btn-secondary btn-sm" @click="getListagem()">Pesquisar</button>
                         <button class="btn btn-warning btn-sm" @click="limparFiltro">Limpar Filtro</button>
                     </div>
 
@@ -203,13 +203,6 @@ export default {
             });
         },
 
-        getPerfil($id){
-            axios.get(`http://127.0.0.1:8000/api/buscarperfil/${$id}`).then((response) => {
-                this.perfil = response.data.tipo
-                return this.perfil
-            });
-        }
-
     },
 
     created(){
@@ -221,5 +214,7 @@ export default {
 </script>
 
 <style>
-
+.btn {
+    margin: 0 7px;
+}
 </style>
