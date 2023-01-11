@@ -2,15 +2,19 @@
   <div>
     <div>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-          <a class="navbar-brand" href="#">Desafio</a>
+          <a class="navbar-brand" style="margin: 0 30px;" href="#">Desafio</a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Alterna navegação">
               <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
               <div class="navbar-nav">
                 <div>
-                  <router-link to="/listar">Tela de Pesquisa   </router-link>
-                  <router-link to="/adicionar">Tela de Cadastro   </router-link>
+                  <router-link to="/listar">
+                    <button type="button" class="btn btn-outline-secondary" style="margin: 0 15px;">Tela de Pesquisa</button>  
+                  </router-link>
+                  <router-link to="/adicionar">
+                    <button type="button" class="btn btn-outline-secondary" style="margin: 0 15px;">Tela de Cadastro</button>  
+                  </router-link>
                 </div>
               </div>
           </div>
@@ -54,6 +58,5 @@ nav a {
 nav a.router-link-exact-active {
   color: #42b983;
 }
-
 
 </style>

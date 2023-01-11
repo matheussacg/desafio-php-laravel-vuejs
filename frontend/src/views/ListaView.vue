@@ -7,34 +7,39 @@
         </router-link>
 
         <div class="container mt-4">
-    
 
                 <div class="row">
 
-                    <div class="col-4">
+                    <div class="col-3">
                         <div class="my-3">
-                            <input type="text" class="form-control" name="nome" id="nome" placeholder="Nome ou CPF" v-model="searchNomeCpf">
+                            <input type="text" class="form-control" placeholder="Pesquisar por nome" v-model="nome">
                         </div>
                     </div>
 
-                    <div class="col-4">
+                    <div class="col-3">
                         <div class="my-3">
-                            <input type="text" class="form-control" name="dataInicio" id="dataInicio" placeholder="Data Cadastro Inicio" v-model="searchDataInicio">
+                            <input type="text" class="form-control" placeholder="Pesquisar por CPF" v-model="cpf">
                         </div>
                     </div>
 
-                    <div class="col-4">
+                    <div class="col-3">
                         <div class="my-3">
-                            <input type="text" class="form-control" name="dataFim" id="dataFim" placeholder="Data Cadastro Fim" v-model="searchDataFim">
+                            <input type="text" class="form-control" placeholder="Data Inicio AAAA-MM-DD" v-model="datai">
+                        </div>
+                    </div>
+
+                    <div class="col-3">
+                        <div class="my-3">
+                            <input type="text" class="form-control" placeholder="Data Fim AAAA-MM-DD" v-model="dataf">
                         </div>
                     </div>
 
                     <div>
-                        <button class="btn btn-warning" @click="limparFiltro">Limpar Filtro</button>
+                        <button class="btn btn-primary btn-sm" @click="getListagem()">Pesquisar</button>
+                        <button class="btn btn-warning btn-sm" @click="limparFiltro">Limpar Filtro</button>
                     </div>
 
                 </div>
-            
 
         </div>
 
@@ -56,7 +61,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="item in filtrarItems" :key="item.id">
+                <tr v-for="item in listagem" :key="item.id">
                 <th>{{item.id}}</th>
                 <td>{{item.created_at}}</td>
                 <td>{{item.nome}}</td>
@@ -153,26 +158,28 @@ export default {
         return {
             listagem: [],
             detalhesUsuario: [],
-            
             perfil: "",
+            excluido: false,
 
-            searchNomeCpf: "",
-            searchDataInicio: "",
-            searchDataFim: "",
+            nome: "",
+            cpf: "",
+            datai: "",
+            dataf: "",
 
-            excluido: false
         }
     },
     methods:{
 
         limparFiltro(){
-            this.searchNomeCpf = "";
-            this.searchDataInicio = "";
-            this.searchDataFim = "";
+            this.nome = "";
+            this.cpf = "";
+            this.datai = "";
+            this.dataf = "";
         },
 
         getListagem(){
-            axios.get("http://127.0.0.1:8000/api/listar").then((response) => {
+        const query = (`?nome=${this.nome}&cpf=${this.cpf}&datai=${this.datai}&dataf=${this.dataf}`)
+            axios.get(`http://127.0.0.1:8000/api/listar${query}`).then((response) => {
                 this.listagem = response.data
             });
         },
@@ -207,31 +214,6 @@ export default {
 
     created(){
         this.getListagem()
-    },
-
-    computed:{
-        filtrarItems(){
-        
-            let items = [];
-
-            items = this.listagem.filter((item) => {
-            return (
-            item.nome.toLowerCase().indexOf(this.searchNomeCpf.toLowerCase()) > -1 ||
-            item.cpf.toLowerCase().indexOf(this.searchNomeCpf.toLowerCase()) > -1  
-            );
-        });   
-            if((this.searchDataInicio) && (this.searchDataFim)){
-
-                items = items.filter((item)=> {
-                let start = new Date(this.searchDataInicio);
-                let end   = new Date(this.searchDataFim)
-                let date = new Date(item.created_at)
-                return ((date >= start) && (date  <= end));
-                });
-            }
-            return items;
-        },
-        
     },
     
 };

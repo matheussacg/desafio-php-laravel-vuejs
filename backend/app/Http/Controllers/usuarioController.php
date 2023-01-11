@@ -10,9 +10,22 @@ class usuarioController extends Controller
 {
     public function listagem(Request $request)
     {
-        $Usuario = Usuario::with('enderecos','perfil')->get();
+        $Usuario = Usuario::with('enderecos','perfil');
 
-        return response()->json($Usuario);
+        if ($request->nome != "") {
+            $Usuario->where('nome', 'LIKE', '%' . $request->nome . '%');
+        }
+    
+        if ($request->cpf != "") {
+            $Usuario->where('cpf', 'LIKE', '%' . $request->cpf . '%');
+        }
+    
+        if ($request->datai != "" && $request->dataf != "") {
+            $Usuario->whereDate('created_at', '>=', $request->datai);
+            $Usuario->whereDate('created_at', '<=', $request->dataf);
+        }
+
+        return response()->json($Usuario->get());
     }
 
     public function adicionar(Request $request)
